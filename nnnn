@@ -1,0 +1,67 @@
+package example01;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class Solution4 {
+	
+	static int[][] answer;
+	
+	static PriorityQueue<Integer>[] que;
+	
+	static List<Integer>[] qqqq;
+	
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		System.setIn(new FileInputStream("Sample_input.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		for(int i=1; i<=T; i++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int N = Integer.parseInt(st.nextToken());
+			int H = Integer.parseInt(st.nextToken());
+			answer = new int[N+2][H+2];
+			for(int j=1; j<=N; j++) {
+				st = new StringTokenizer(br.readLine());
+				int que = Integer.parseInt(st.nextToken());
+				if(j % 2 == 0) {
+					for(int k=1; k<=que; k++) {
+						answer[j][k] = 1;
+						answer[N+1][k] = answer[N+1][k] + 1; 
+					}
+				} else {
+					for(int k=H; k>H-que; k--) {
+						
+						answer[j][k] = 1;
+						answer[N+1][k] = answer[N+1][k] + 1;
+					}
+				}
+			}
+			
+			int min = Integer.MAX_VALUE;
+			int count = 0;
+			for(int q=1; q<=H; q++) {
+				if(answer[N+1][q] < min) {
+					min = answer[N+1][q];
+					count = 1;
+				} else if(answer[N+1][q] == min) {
+					count++;
+				}
+				
+			}
+			System.out.println("#"+i + " " + min + " " + count);
+			
+			
+			
+			
+		}
+		
+	}
+
+}
