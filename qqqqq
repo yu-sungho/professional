@@ -1,0 +1,59 @@
+package example01;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class Solution5 {
+	
+	static Position[] answer;
+	static int[] temp;
+	
+	
+
+	
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		System.setIn(new FileInputStream("Sample_input.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		for(int i=1; i<=T; i++) {
+			int N = Integer.parseInt(br.readLine());
+			answer = new Position[N+2];
+			for(int j=1; j<=N; j++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				answer[j] = new Position(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+			}
+			
+			answer[N+1] = new Position(answer[1].x, answer[1].y);
+			
+			float sumFirst = 0;
+			float sumSecond = 0;
+			for(int k=1; k<=N; k++) {
+				sumFirst += answer[k].x * answer[k+1].y;
+				sumSecond -= answer[k].y * answer[k+1].x;
+			}
+			System.out.println(String.format("%.1g%n", Math.abs((sumFirst+sumSecond) / 2)));
+			;
+			
+			
+			
+		}
+		
+	}
+	
+	public static class Position{
+		private int x;
+		private int y;
+		public Position(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+
+}
