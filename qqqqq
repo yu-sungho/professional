@@ -32,18 +32,20 @@ public class Solution5 {
 			
 			answer[N+1] = new Position(answer[1].x, answer[1].y);
 			
-			float sumFirst = 0;
-			float sumSecond = 0;
+			long sumFirst = 0;
+			long sumSecond = 0;
 			for(int k=1; k<=N; k++) {
 				sumFirst += answer[k].x * answer[k+1].y;
-				sumSecond -= answer[k].y * answer[k+1].x;
+				sumSecond += answer[k].y * answer[k+1].x;
 			}
-			System.out.println(String.format("%.1g%n", Math.abs((sumFirst+sumSecond) / 2)));
-			;
+			//System.out.println("#" + i + " " + Math.abs((sumFirst-sumSecond) / 2));
+			if (Math.abs(sumFirst-sumSecond) % 2 == 1)
+	            System.out.println("#" + i + " " +(Math.abs(sumFirst-sumSecond) / 2) + ".5");
+	        else
+	            System.out.println("#" + i + " " +(Math.abs(sumFirst-sumSecond) / 2) + ".0");
+	    }
 			
-			
-			
-		}
+
 		
 	}
 	
