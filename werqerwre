@@ -1,0 +1,75 @@
+package example01;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.StringTokenizer;
+
+public class Solution7 {
+	
+
+	static long[] totalScore;
+	static long total;
+	static int[] arr;
+	static long score;
+	
+	
+
+	
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		System.setIn(new FileInputStream("Sample_input.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(br.readLine());
+		for(int i=1; i<=T; i++) {
+			int N = Integer.parseInt(br.readLine());
+			int M = Integer.parseInt(br.readLine());
+			arr = new int[N+1];
+			for(int k=1; k<=N; k++) {
+				arr[k] = k;
+			}
+			
+			int count = 0;
+			for(int j=1; j<=M; j++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				int c = Integer.parseInt(st.nextToken());
+				if(a == 0) {
+					union(b, c);
+				} else {
+					if(find(b) == find(c)) {
+						count++;
+					}
+				}
+				
+			}
+			
+			System.out.println("#" + i + " " + count);
+			
+			
+	    }
+	}
+	
+	public static int find(int a) {
+		if(arr[a] == a) {
+			return a;
+		}
+		return find(arr[a]);
+	}
+	
+	public static void union(int a, int b) {
+		int q1 = find(a);
+		int q2 = find(b);
+		
+		if(q1 == q2) {
+			return;
+		}
+		
+		arr[q2] = q1;
+	}
+
+
+}
